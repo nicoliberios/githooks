@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Este hook se ejecuta antes de cada commit
+
+# Comprobación de estilo Go (usando gofmt)
+echo "Verificando el estilo de código (gofmt)..."
+gofmt -l .  # Compara los archivos Go con el estilo recomendado por gofmt
+
+if [ $? -ne 0 ]; then
+  echo "ERROR: Algunos archivos Go no están formateados correctamente. Ejecuta 'gofmt' para corregirlos."
+  exit 1
+fi
+
+# Aquí puedes agregar más comprobaciones, como tests u otras herramientas de linters
+
+echo "¡Todo está bien! Continuando con el commit."
+exit 0

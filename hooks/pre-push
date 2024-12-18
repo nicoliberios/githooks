@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Este hook se ejecuta antes de cada push al repositorio remoto
+
+# Verifica si hay tests fallidos
+echo "Ejecutando tests Go..."
+go test ./...  # Ejecuta todos los tests en el proyecto
+
+if [ $? -ne 0 ]; then
+  echo "ERROR: Algunos tests no pasaron. Deteniendo el push."
+  exit 1
+fi
+
+echo "¡Todos los tests pasaron! Continuando con el push."
+exit 0
